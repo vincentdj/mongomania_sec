@@ -1,3 +1,4 @@
+on: push
 name: 'Dastardly Scan Action'
 description: 'Runs a Dastardly scan against a target site'
 author: 'PortSwigger'
