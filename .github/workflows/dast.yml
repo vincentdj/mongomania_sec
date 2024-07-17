@@ -1,10 +1,21 @@
-- name: Dastardly Scan Action
-  # You may pin to the exact commit or the version.
-  # uses: PortSwigger/dastardly-github-action@f72f38f8b4ac8ed59c69854cc77eb9d53e50e78b
-  uses: PortSwigger/dastardly-github-action@v1.0.0
-  with:
-    # The full url (including scheme) of the site to scan
-    target-url: 
-    # The filename used for the scan report. This filepath relates to the dastardly container, and will exist in the github workspace (/github/workspace)
-    output-filename: # optional, default is dastardly-report.xml
-          
+name: 'Dastardly Scan Action'
+description: 'Runs a Dastardly scan against a target site'
+author: 'PortSwigger'
+inputs:
+  target-url:
+    description: 'The full url (including scheme) of the site to scan'
+    required: true
+    default: 'https://ginandjuice.shop/'
+  output-filename:
+    description: 'The filename used for the scan report. This filepath relates to the dastardly container, and will exist in the github workspace (/github/workspace)'
+    required: false
+    default: dastardly-report.xml
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    BURP_START_URL: ${{ inputs.target-url }}
+    BURP_REPORT_FILE_PATH: /github/workspace/${{ inputs.output-filename }}
+branding:
+  icon: 'activity'
+  color: 'green'
