@@ -30,13 +30,14 @@ jobs:
 
     - name: Check containers
       run: docker network inspect web
-
-    - name: Stop containers
-      if: always()
-      run: docker compose -f "docker-compose.yml" down -v --rmi all
     
     - name: Scan with sqlmap
       uses: thereisnotime/action-sqlmap@master
         with:
           url: "http://172.18.0.3"
-          additional_args: "--batch --crawl=2 --random-agent --forms --level=5 --risk=3"
+          additional_args: "--batch --crawl=2 --random-agent --forms --level=5 --risk=3"      
+
+    - name: Stop containers
+      if: always()
+      run: docker compose -f "docker-compose.yml" down -v --rmi all
+    
