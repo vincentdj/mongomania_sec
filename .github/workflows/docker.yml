@@ -34,7 +34,7 @@ jobs:
     - name: Scan with sqlmap
       uses: thereisnotime/action-sqlmap@master
       with:
-        url: "http://172.18.0.3"
+        url: "http://172.18.0.2"
         additional_args: "--batch --crawl=2 --random-agent --forms --level=5 --risk=3"      
 
     - name: Stop containers
