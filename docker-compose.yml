@@ -1,0 +1,34 @@
+version: '3'
+services:
+  energyapi:
+    networks:
+      - web
+    build: backend
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/mydatabase  # Update the database name if needed
+    depends_on:
+      - mongodb
+  
+  streamlit:
+    build: frontend
+    networks:
+      - web
+  mongodb:
+    image: mongo:latest
+    networks:
+      - web
+    ports:
+    - "27017:27017"  
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d:ro  # Mount the init script
+    environment:
+      MONGO_INITDB_DATABASE: mydatabase  # Set the initial database name
+
+networks:
+  web:
+    external: true
+
+volumes:
+  mongodb_data:
+    driver: local
