@@ -4,7 +4,7 @@ from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from typing import Union
 
-SECRET_KEY = "97382689029b92c526a5a1fb0ed7e7f3"  # Replace with a secure secret key
+SECRET_KEY = "secret"  # Replace with a secure secret key
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 

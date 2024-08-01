@@ -8,6 +8,7 @@ client = AsyncIOMotorClient(MONGO_DETAILS)
 
 database = client.get_database()
 user_collection = database.get_collection("users")
+energy_collection = database.get_collection("energy")  # Voeg deze regel toe
 
 def get_db():
     return database
