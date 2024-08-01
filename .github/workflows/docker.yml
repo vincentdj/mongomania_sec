@@ -21,8 +21,15 @@ jobs:
 
     - name: Create network
       run: docker network create web || true
+
     - name: Start containers
       run: docker compose -f "docker-compose.yml" up -d --build
+
+    - name: Check containers
+      run: docker container ps
+
+    - name: Check containers
+      run: docker network inspect web
 
     - name: Stop containers
       if: always()
