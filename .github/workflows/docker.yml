@@ -40,6 +40,10 @@ jobs:
       uses: PortSwigger/dastardly-github-action@main
       with:
         target-url: 'http://172.18.0.2'
+    - name: Check containers
+      run: docker container ps
+    - name: Check containers
+      run: docker network inspect web
     - name: Stop containers
       if: always()
       run: docker compose -f "docker-compose.yml" down -v --rmi all
