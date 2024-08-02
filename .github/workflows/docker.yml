@@ -30,7 +30,10 @@ jobs:
       with:
         url: "http://172.18.0.2" # Pas dit aan naar de juiste container naam of IP-adres en poort
         additional_args: "--batch --crawl=2 --random-agent --forms --level=5 --risk=3"
-    
+    - name: Check network
+      if: always()
+      run: netstat -tulpn
+      
     - name: Check container
       if: always()
       run: docker container ps
