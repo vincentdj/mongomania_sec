@@ -40,9 +40,9 @@ jobs:
       uses: PortSwigger/dastardly-github-action@main
       with:
         target-url: 'http://172.18.0.2'
-    - name: Check containers
+    - name: Check containers 2
       run: docker container ps
-    - name: Check containers
+    - name: Check containers 2
       run: docker network inspect web
     - name: Stop containers
       if: always()
