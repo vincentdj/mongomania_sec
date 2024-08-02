@@ -26,7 +26,7 @@ jobs:
       run: docker compose -f "docker-compose.yml" up -d --build
 
     - name: Scan with sqlmap
-      run: docker run --network web vincentdj/action-sqlmap --url "http://container_name_or_ip_address:port" --batch --crawl=2 --random-agent --forms --level=5 --risk=3
+      run: docker run --network web secsi/sqlmap:latest --url "http://172.18.0.2" --batch --crawl=2 --random-agent --forms --level=5 --risk=3
     
     - name: Check network
       if: always()
