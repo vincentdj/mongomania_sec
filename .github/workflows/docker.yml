@@ -24,19 +24,7 @@ jobs:
 
     - name: Start containers
       run: docker compose -f "docker-compose.yml" up -d --build
-
-    - name: Connect containers to network
-      run: |
-        for container_id in $(docker compose ps -q); do
-          docker network connect web $container_id
-        done
-
-    - name: Scan with sqlmap
-      uses: thereisnotime/action-sqlmap@master
-      with:
-        url: "http://172.18.0.2" # Pas dit aan naar de juiste container naam of IP-adres en poort
-        additional_args: "--batch --crawl=2 --random-agent --forms --level=5 --risk=3"
-
+      
     - name: Run Dastardly Action Step
       uses: PortSwigger/dastardly-github-action@main
       with:
