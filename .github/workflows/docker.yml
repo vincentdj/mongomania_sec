@@ -3,12 +3,12 @@ name: Test
 on:
   push:
     branches:
-    - main
-    - features/**
-    - dependabot/**
+      - main
+      - features/**
+      - dependabot/**
   pull_request:
     branches:
-    - main
+      - main
 
 jobs:
   docker:
@@ -25,26 +25,33 @@ jobs:
     - name: Start containers
       run: docker compose -f "docker-compose.yml" up -d --build
 
+    - name: Connect containers to network
+      run: |
+        docker network connect web $(docker-compose ps -q)
+
     - name: Check containers
       run: docker container ps
 
-    - name: Check containers
+    - name: Check network
       run: docker network inspect web
-    
+
     - name: Scan with sqlmap
       uses: thereisnotime/action-sqlmap@master
       with:
-        url: "http://172.18.0.2"
-        additional_args: "--batch --crawl=2 --random-agent --forms --level=5 --risk=3"      
+        url: "http://172.18.0.2" # Pas dit aan naar de juiste container naam of IP-adres en poort
+        additional_args: "--batch --crawl=2 --random-agent --forms --level=5 --risk=3"
+
     - name: Run Dastardly Action Step
       uses: PortSwigger/dastardly-github-action@main
       with:
-        target-url: 'http://172.18.0.2'
+        target-url: 'http://172.18.0.2' # Pas dit aan naar de juiste container naam of IP-adres en poort
+
     - name: Check containers 2
       run: docker container ps
-    - name: Check containers 2
+
+    - name: Check network 2
       run: docker network inspect web
+
     - name: Stop containers
       if: always()
       run: docker compose -f "docker-compose.yml" down -v --rmi all
-    
