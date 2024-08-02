@@ -24,16 +24,18 @@ jobs:
 
     - name: Start containers
       run: docker compose -f "docker-compose.yml" up -d --build
-      
+
     - name: Run Dastardly Action Step
       uses: PortSwigger/dastardly-github-action@main
       with:
         target-url: 'http://172.18.0.2' # Pas dit aan naar de juiste container naam of IP-adres en poort
 
     - name: Check container
+      if: always()
       run: docker container ps
 
     - name: Check network
+      if: always()
       run: docker network inspect web
 
     - name: Stop containers
