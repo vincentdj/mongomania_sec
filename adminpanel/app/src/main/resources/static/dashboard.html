@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mt-5">Energy Meter Dashboard</h2>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <form id="searchForm" class="d-flex mb-4">
+                    <input class="form-control me-2" type="search" id="searchQuery" placeholder="Search energy meters">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <form id="addMeterForm" class="mb-4">
+                    <h4>Add New Energy Meter</h4>
+                    <div class="form-group">
+                        <label for="meterId">Meter ID</label>
+                        <input type="text" class="form-control" id="meterId" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="status">Status</label>
+                        <input type="text" class="form-control" id="status" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4">Add Meter</button>
+                </form>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Meter ID</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="meterTableBody">
+                        <!-- Dynamic content -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
