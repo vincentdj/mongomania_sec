@@ -13,7 +13,6 @@ RUN ls -lha
 RUN microdnf install findutils
 
 WORKDIR /app
-# Run the Gradle build (optional, can be done at runtime if preferred)
-RUN cd app && ./gradlew build
+
 
 CMD ["sh", "-c", "cd app && ./gradlew bootRun"]
