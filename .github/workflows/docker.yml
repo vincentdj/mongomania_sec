@@ -24,9 +24,10 @@ jobs:
 
     - name: Start containers
       run: docker compose -f "docker-compose.yml" up -d --build
-
+    - name: Scan with ZAP
+      run: docker run --network=host -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://adminpanel.docker.localhost -g gen.conf -r testreport.html
     - name: Scan with sqlmap
-      run: docker run --network web secsi/sqlmap:latest --url "http://adminpanel:8080" --batch --crawl=2 --random-agent --forms --level=5 --risk=3
+      run: docker run --network=web secsi/sqlmap:latest --url "http://adminpanel:8080" --batch --crawl=2 --random-agent --forms --level=5 --risk=3
     
     - name: Check network
       if: always()
