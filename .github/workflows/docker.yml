@@ -24,6 +24,8 @@ jobs:
 
     - name: Start containers
       run: docker compose -f "docker-compose.yml" up -d --build
+    - name: Scan with XXSTRIKE
+      run: docker run --network=host --rm -ti femtopixel/xsstrike -u http://adminpanel.docker.localhost
     - name: Scan with ZAP
       run: docker run --network=host -v $(pwd):/zap/wrk/:rw -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://adminpanel.docker.localhost -g gen.conf -r testreport.html
     - name: Scan with sqlmap
